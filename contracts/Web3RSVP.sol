@@ -32,7 +32,7 @@ contract Web3RSVP {
                 _maxCapacity
             )
         );
-
+        require(idToEvent[eventId].eventTimestamp == 0, "ALREADY REGISTED");
         address[] memory confirmedRSVPs;
         address[] memory claimedRSVPs;
         idToEvent[eventId] = CreateEvent(
