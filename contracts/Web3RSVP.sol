@@ -186,5 +186,6 @@ contract Web3RSVP {
         }
 
         require(sent, "Failed to send Ether");
+        emit DepositsPaidOut(eventId);
     }
 }
