@@ -96,6 +96,7 @@ contract Web3RSVP {
         }
 
         myEvent.confirmedRSVPs.push(payable(msg.sender));
+        emit NewRSVP(eventId, msg.sender);
     }
 
     function confirmAttendee(bytes32 eventId, address attendee) public {
