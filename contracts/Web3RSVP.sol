@@ -60,6 +60,15 @@ contract Web3RSVP {
             claimedRSVPs,
             false
         );
+
+        emit NewEventCreated(
+            eventId,
+            msg.sender,
+            _eventTimestamp,
+            _maxCapacity,
+            _deposit,
+            _eventDataCID
+        );
     }
 
     function createNewRSVP(bytes32 eventId) external payable {
