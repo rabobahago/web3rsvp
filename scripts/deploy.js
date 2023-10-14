@@ -22,7 +22,24 @@ async function main() {
   const { address: deployer } = first;
   const { address: address1 } = second;
   const { address: address2 } = third;
-  console.log(deployer, address1, address2);
+  // console.log(deployer, address1, address2);
+  let deposit = hre.ethers.utils.parseEther("1");
+  let maxCapacity = 3;
+  let timestamp = 1718926200;
+  let eventDataCID =
+    "bafybeibhwfzx6oo5rymsxmkdxpmkfwyvbjrrwcl7cekmbzlupmp5ypkyfi";
+
+  let txn = await rsvpContract.createNewEvent(
+    timestamp,
+    deposit,
+    maxCapacity,
+    eventDataCID
+  );
+  let wait = await txn.wait();
+  console.log("NEW EVENT CREATED:", wait.events[0].event, wait.events[0].args);
+
+  let eventID = wait.events[0].args.eventID;
+  console.log("EVENT ID:", eventID);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
