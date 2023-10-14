@@ -4,6 +4,14 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 contract Web3RSVP {
+    event NewEventCreated(
+        bytes32 eventID,
+        address creatorAddress,
+        uint256 eventTimestamp,
+        uint256 maxCapacity,
+        uint256 deposit,
+        string eventDataCID
+    );
     struct CreateEvent {
         bytes32 eventId;
         string eventDataCID;
