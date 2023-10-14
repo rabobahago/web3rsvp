@@ -14,14 +14,16 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
-
-  await greeter.deployed();
-
-  console.log("Greeter deployed to:", greeter.address);
+  const rsvpContractFactory = await hre.ethers.getContractFactory("Web3RSVP");
+  const rsvpContract = await rsvpContractFactory.deploy();
+  await rsvpContract.deployed();
+  console.log("Contract deployed to:", rsvpContract.address);
+  const [first, second, third] = await hre.ethers.getSigners();
+  const { address: deployer } = first;
+  const { address: address1 } = second;
+  const { address: address2 } = third;
+  console.log(deployer, address1, address2);
 }
-
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main()
