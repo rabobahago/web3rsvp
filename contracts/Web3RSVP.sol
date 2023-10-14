@@ -12,6 +12,8 @@ contract Web3RSVP {
         uint256 deposit,
         string eventDataCID
     );
+
+    event NewRSVP(bytes32 eventID, address attendeeAddress);
     struct CreateEvent {
         bytes32 eventId;
         string eventDataCID;
