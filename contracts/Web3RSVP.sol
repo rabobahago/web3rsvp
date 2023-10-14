@@ -136,6 +136,7 @@ contract Web3RSVP {
             myEvent.claimedRSVPs.pop();
         }
         require(sent, "Failed to send Ether");
+        emit ConfirmedAttendee(eventId, attendee);
     }
 
     function confirmAllAttendees(bytes32 eventId) external {
