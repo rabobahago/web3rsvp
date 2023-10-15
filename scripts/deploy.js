@@ -79,6 +79,12 @@ async function main() {
   wait.events.forEach((event) => {
     console.log("CONFIRMED: ", event.args.attendeeAddress);
   });
+
+  // wait 10 years
+  await hre.network.provider.send("evm_increaseTime", [15778800000000]);
+  txn = await rsvpContract.withdrawUnclaimedDeposits(eventID);
+  wait = await txn.wait();
+  console.log("WITHDRAWN:", wait.events[0].event, wait.events[0].args);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
