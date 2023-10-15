@@ -67,7 +67,12 @@ async function main() {
     .createNewRSVP(eventID, { value: deposit });
   wait = await txn.wait();
   console.log("New RSVP", wait.events[0].event, wait.events[0].args);
-  console.log(address1);
+  //create createNewEvent with third address
+  txn = await rsvpContract
+    .connect(address2)
+    .createNewRSVP(eventID, { value: deposit });
+  wait = await txn.wait();
+  console.log("NEW RSVP:", wait.events[0].event, wait.events[0].args);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
