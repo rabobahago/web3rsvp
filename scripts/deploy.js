@@ -54,13 +54,13 @@ async function main() {
     logIndex,
     events,
   } = wait;
-  console.log("details", events[0].event, events[0].args);
-  console.log("NEW EVENT CREATED:", wait.events[0].event, wait.events[0].args);
+  // console.log("details", events[0].event, events[0].args);
+  // console.log("NEW EVENT CREATED:", wait.events[0].event, wait.events[0].args);
 
   let eventID = wait.events[0].args.eventID;
-  console.log("EVENT ID:", eventID);
+  // console.log("EVENT ID:", eventID);
   //create createNewEvent with deployer address
-  txn = await rsvpContract.createNewEvent(eventID, { value: deposit });
+  txn = await rsvpContract.createNewRSVP(eventID, { value: deposit });
   wait = await txn.wait();
   console.log("New RSVP", wait.events[0].event, wait.events[0].args);
 }
