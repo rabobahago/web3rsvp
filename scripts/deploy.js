@@ -37,10 +37,32 @@ async function main() {
     eventDataCID
   );
   let wait = await txn.wait();
+  const {
+    to,
+    from,
+    blockHash,
+    transactionHash,
+    logs: {
+      transactionIndex,
+      blockNumber,
+      transactionHash: txnHash,
+      address,
+      topics,
+      data,
+    },
+    blockHash: txnBlockHash,
+    logIndex,
+    events,
+  } = wait;
+  console.log("details", events[0].event, events[0].args);
   console.log("NEW EVENT CREATED:", wait.events[0].event, wait.events[0].args);
 
   let eventID = wait.events[0].args.eventID;
   console.log("EVENT ID:", eventID);
+  //create createNewEvent with deployer address
+  txn = await rsvpContract.createNewEvent(eventID, { value: deposit });
+  wait = await txn.wait();
+  console.log("New RSVP", wait.events[0].event, wait.events[0].args);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
