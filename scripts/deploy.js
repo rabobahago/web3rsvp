@@ -73,6 +73,12 @@ async function main() {
     .createNewRSVP(eventID, { value: deposit });
   wait = await txn.wait();
   console.log("NEW RSVP:", wait.events[0].event, wait.events[0].args);
+  //confirm all attendees
+  txn = await rsvpContract.confirmAllAttendees(eventID);
+  wait = await txn.wait();
+  wait.events.forEach((event) => {
+    console.log("CONFIRMED: ", event.args.attendeeAddress);
+  });
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
