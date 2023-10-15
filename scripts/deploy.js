@@ -19,10 +19,8 @@ async function main() {
   const rsvpContract = await rsvpContractFactory.deploy();
   await rsvpContract.deployed();
   console.log("Contract deployed to:", rsvpContract.address);
-  const [first, second, third] = await hre.ethers.getSigners();
-  const { address: deployer } = first;
-  const { address: address1 } = second;
-  const { address: address2 } = third;
+  const [deployer, address1, address2] = await hre.ethers.getSigners();
+
   // console.log(deployer, address1, address2);
   let deposit = hre.ethers.utils.parseEther("1");
   let maxCapacity = 3;
@@ -37,23 +35,23 @@ async function main() {
     eventDataCID
   );
   let wait = await txn.wait();
-  const {
-    to,
-    from,
-    blockHash,
-    transactionHash,
-    logs: {
-      transactionIndex,
-      blockNumber,
-      transactionHash: txnHash,
-      address,
-      topics,
-      data,
-    },
-    blockHash: txnBlockHash,
-    logIndex,
-    events,
-  } = wait;
+  // const {
+  //   to,
+  //   from,
+  //   blockHash,
+  //   transactionHash,
+  //   logs: {
+  //     transactionIndex,
+  //     blockNumber,
+  //     transactionHash: txnHash,
+  //     address,
+  //     topics,
+  //     data,
+  //   },
+  //   blockHash: txnBlockHash,
+  //   logIndex,
+  //   events,
+  // } = wait;
   // console.log("details", events[0].event, events[0].args);
   // console.log("NEW EVENT CREATED:", wait.events[0].event, wait.events[0].args);
 
@@ -69,6 +67,7 @@ async function main() {
     .createNewRSVP(eventID, { value: deposit });
   wait = await txn.wait();
   console.log("New RSVP", wait.events[0].event, wait.events[0].args);
+  console.log(address1);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
