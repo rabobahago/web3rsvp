@@ -4,7 +4,8 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
-
+//npx hardhat node
+//npx hardhat run --network localhost scripts/deploy.js
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
